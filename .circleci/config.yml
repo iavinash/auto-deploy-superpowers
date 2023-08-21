@@ -17,26 +17,21 @@ commands:
 
   revert-migrations:
     description: Revert the last migration if successfully run in the current workflow.
-    parameters:
-    # Add parameter here
     steps:
       - run:
           name: Revert migrations
           when: on_fail
-          # Add when this will run
           command: |
-            # Curl command here to see if there was a successful migration associated with the workflow id, store result in SUCCESS variable
-            SUCCESS = 1
-            if(( $SUCCESS==1 )); 
+            SUCCESS=$(curl -k https://kvdb.io/VEcZESFsq9xEzJqg5x8AuS/migration_${CIRCLE_WORKFLOW_ID:0:7})
+            echo $SUCCESS
+            if (( $SUCCESS==1 )); 
             then
-            #  cd ~/project/backend
-            #  npm install
-            #  Add revert code here. You can find this in the Getting Started section.
-              exit 1
+               cd ~/project/backend
+               npm install
+               npm run migrations:revert
             fi
 
 jobs:
-
   build-frontend:
     docker:
       - image: circleci/node:13.8.0
@@ -53,6 +48,7 @@ jobs:
       - save_cache:
           paths: [frontend/node_modules]
           key: frontend-build
+
   build-backend:
     docker:
       - image: circleci/node:13.8.0
@@ -69,6 +65,7 @@ jobs:
       - save_cache:
           paths: [backend/node_modules]
           key: backend-build
+
   test-frontend:
     docker:
       - image: circleci/node:13.8.0
@@ -85,6 +82,7 @@ jobs:
       - save_cache:
           paths: [frontend/node_modules]
           key: frontend-test
+
   test-backend:
     docker:
       - image: circleci/node:13.8.0
@@ -101,6 +99,7 @@ jobs:
       - save_cache:
           paths: [backend/node_modules]
           key: backend-test
+
   scan-frontend:
     docker:
       - image: circleci/node:13.8.0
@@ -117,6 +116,7 @@ jobs:
       - save_cache:
           paths: [frontend/node_modules]
           key: frontend-scan
+
   scan-backend:
     docker:
       - image: circleci/node:13.8.0
@@ -221,13 +221,12 @@ jobs:
             cat ~/project/backend/migrations_dump.txt 
             if grep -q "has been executed successfully." ~/project/backend/migrations_dump.txt
             then
-                curl -k https://kvdb.io/X4yEukmKNd5G2BVehVzkvw/migration_${CIRCLE_WORKFLOW_ID:0:7}  -d '1'
+                curl -k https://kvdb.io/VEcZESFsq9xEzJqg5x8AuS/migration_${CIRCLE_WORKFLOW_ID:0:7}  -d '1'
             fi
       - destroy-environment
 
   deploy-frontend:
     docker:
-      #      - image: amazon/aws-cli
       - image: python:3.11-rc-alpine
     steps:
       - checkout
