@@ -112,7 +112,9 @@ jobs:
           command: |
             cd frontend
             npm install
-            npm audit fix --audit-level=critical --force
+            npm audit fix --force --audit-level=critical
+            npm audit fix --force --audit-level=critical
+            npm audit --audit-level=critical
       - save_cache:
           paths: [frontend/node_modules]
           key: frontend-scan
@@ -129,7 +131,9 @@ jobs:
           command: |
             cd backend
             npm install
-            npm audit fix --audit-level=critical --force
+            npm audit fix --force --audit-level=critical
+            npm audit fix --force --audit-level=critical
+            npm audit --audit-level=critical
       - save_cache:
           paths: [backend/node_modules]
           key: backend-scan
@@ -199,6 +203,8 @@ jobs:
       - image: cimg/node:14.17.4
     steps:
       - checkout
+      - attach_workspace:
+          at: ~/
       - run:
           name: Install dependencies
           command: |
@@ -208,8 +214,7 @@ jobs:
             sudo ./aws/install
       - restore_cache:
           keys: [ backend-build ]
-      - attach_workspace:
-          at: ~/
+
       - run:
           name: Run migrations
           command: |
