@@ -2,4 +2,7 @@
 https://github.com/iavinash/auto-deploy-superpowers
 
 [URL02] - Public URL of S3 Bucket
-http://udapeople-ff7250b.s3-website-us-east-1.amazonaws.com
+http://udapeople-ef7b888.s3-website-us-east-1.amazonaws.com/#/employees
+
+[URL03] - APP URL
+http://udapeople-ef7b888.s3-website-us-east-1.amazonaws.com/#/employees

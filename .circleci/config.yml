@@ -460,8 +460,8 @@ workflows:
           filters:
             branches:
               only: [main]
-#      - cleanup:
-#          requires: [cloudfront-update]
-#          filters:
-#            branches:
-#              only: [main]
+      - cleanup:
+          requires: [cloudfront-update]
+          filters:
+            branches:
+              only: [main]
