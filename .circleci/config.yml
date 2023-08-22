@@ -305,23 +305,36 @@ jobs:
 
   smoke-test:
     docker:
-      - image: python:3.11-rc-alpine
+      - image: node:13.8-buster #python:3.11-rc-alpine
     steps:
       - checkout
       - run:
-          name: Install dependencies
+          name: Update packages
           command: |
-            apk add --update tar gzip ansible nodejs npm curl && pip install awscli
+            apt update
       - run:
-          name: Frontend smoke test.
+          name: Install dependencies (Curl)
           command: |
+            apt-get -y install curl
+      - run:
+          name: Install dependencies (AWS-Cli)
+          command: |
+            apt-get -y install awscli
+#      - run:
+#          name: Install dependencies
+#          command: |
+#            apk add --update tar gzip ansible nodejs npm curl && pip install awscli
+      - run:
+          name: Frontend smoke test
+          command: |
+            sleep 60
             URL="http://udapeople-${CIRCLE_WORKFLOW_ID:0:7}.s3-website-us-west-2.amazonaws.com/#/employees" 
             echo ${URL}
             if curl -s ${URL} | grep "Welcome"
             then 
-              return 0
+              exit 0
             else
-              return 1
+              exit 1
             fi
       - run:
           name: Backend smoke test
@@ -331,12 +344,12 @@ jobs:
             echo "${API_URL}"
             if curl "${API_URL}/api/status" | grep "ok"
             then 
-              return 0
+              exit 0
             else
-              return 1
+              exit 1
             fi
       - destroy-environment
-      - revert-migrations
+      #- revert-migrations
 
   cloudfront-update:
     docker:
@@ -429,11 +442,11 @@ workflows:
           filters:
             branches:
               only: [main]
-      - run-migrations:
-          requires: [configure-infrastructure]
-          filters:
-            branches:
-              only: [main]
+#      - run-migrations:
+#          requires: [configure-infrastructure]
+#          filters:
+#            branches:
+#              only: [main]
       - deploy-backend:
           requires: [run-migrations]
           filters:
@@ -454,8 +467,8 @@ workflows:
           filters:
             branches:
               only: [main]
-      - cleanup:
-          requires: [cloudfront-update]
-          filters:
-            branches:
-              only: [main]
+#      - cleanup:
+#          requires: [cloudfront-update]
+#          filters:
+#            branches:
+#              only: [main]
