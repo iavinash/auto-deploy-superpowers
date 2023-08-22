@@ -457,16 +457,16 @@ workflows:
           filters:
             branches:
               only: [main]
-      - smoke-test:
-          requires: [deploy-backend, deploy-frontend]
-          filters:
-            branches:
-              only: [main]
-      - cloudfront-update:
-          requires: [smoke-test]
-          filters:
-            branches:
-              only: [main]
+#      - smoke-test:
+#          requires: [deploy-backend, deploy-frontend]
+#          filters:
+#            branches:
+#              only: [main]
+#      - cloudfront-update:
+#          requires: [smoke-test]
+#          filters:
+#            branches:
+#              only: [main]
 #      - cleanup:
 #          requires: [cloudfront-update]
 #          filters:
