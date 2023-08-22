@@ -448,12 +448,12 @@ workflows:
 #            branches:
 #              only: [main]
       - deploy-backend:
-          requires: [run-migrations]
+          #requires: [run-migrations]
           filters:
             branches:
               only: [main]
       - deploy-frontend:
-          requires: [run-migrations]
+          #requires: [run-migrations]
           filters:
             branches:
               only: [main]
