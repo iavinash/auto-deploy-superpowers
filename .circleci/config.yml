@@ -236,6 +236,8 @@ jobs:
       - image: python:3.11-rc-alpine
     steps:
       - checkout
+      - add_ssh_keys:
+          fingerprints: ["a0:ba:51:41:ce:96:81:c2:86:22:6b:0d:2e:6c:37:fb"]
       - attach_workspace:
           at: ~/
       - run:
@@ -268,7 +270,7 @@ jobs:
     steps:
       - checkout
       - add_ssh_keys:
-          fingerprints: ["45:af:67:1f:85:a4:78:e5:d9:a5:db:ce:4c:bd:b9:e3"]
+          fingerprints: ["a0:ba:51:41:ce:96:81:c2:86:22:6b:0d:2e:6c:37:fb"]
       - run:
           name: Install dependencies
           command: |
