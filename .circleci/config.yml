@@ -418,7 +418,7 @@ workflows:
       - build-frontend
       - build-backend
       - test-frontend:
-          requires: [build-frontend]
+          requires: [build-fron![](../Screenshots/Screenshot.png)tend]
       - test-backend:
           requires: [build-backend]
       - scan-frontend:
