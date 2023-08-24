@@ -6,3 +6,7 @@ http://udapeople-ef7b888.s3-website-us-east-1.amazonaws.com/#/employees
 
 [URL03] - APP URL
 http://udapeople-ef7b888.s3-website-us-east-1.amazonaws.com/#/employees
+http://d2q28pzpjmztca.cloudfront.net/#/employees
+
+[URL04] - PROMETHEUS URl
+http://ec2-54-147-108-74.compute-1.amazonaws.com:9090/targets
