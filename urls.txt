@@ -2,11 +2,11 @@
 https://github.com/iavinash/auto-deploy-superpowers
 
 [URL02] - Public URL of S3 Bucket
-http://udapeople-ef7b888.s3-website-us-east-1.amazonaws.com/#/employees
+http://udapeople-df81a61.s3-website-us-east-1.amazonaws.com/#/employees
 
 [URL03] - APP URL
-http://udapeople-ef7b888.s3-website-us-east-1.amazonaws.com/#/employees
-http://d2q28pzpjmztca.cloudfront.net/#/employees
+http://udapeople-df81a61.s3-website-us-east-1.amazonaws.com/#/employees
+
 
 [URL04] - PROMETHEUS URl
-http://ec2-54-147-108-74.compute-1.amazonaws.com:9090/targets
+http://ec2-52-206-114-204.compute-1.amazonaws.com:9090/targets
